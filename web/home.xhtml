@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>  
+         <!--<ui:include src="menu.xhtml"/>-->
+
+          <f:viewAction action="#{login.verifica(usuario)}"/>
+          
+        <p:fieldset legend="#{usuario}">
+            <p:commandButton value="Sair" action="#{login.sair()}" />
+            <h:form>  
+                <center>
+                <p:panelGrid columns="2">
+                    
+                    <p:outputLabel value="Nome:"></p:outputLabel>    
+                    <p:inputText id="nome" value="#{mensagemBean.mensagem.nome}"></p:inputText>
+                    
+                    <p:outputLabel value="E-mail:"></p:outputLabel>    
+                    <p:inputText id="email" value="#{mensagemBean.mensagem.email}"></p:inputText>
+                    
+                    <p:outputLabel value="Usuario:"></p:outputLabel>    
+                    <p:inputText id="usuario" value="#{mensagemBean.mensagem.usuario}"></p:inputText>
+                    
+                    <p:outputLabel value="Senha:"></p:outputLabel>    
+                    <p:inputText id="senha" value="#{mensagemBean.mensagem.senha}"></p:inputText>
+                    
+                    <p:commandButton value="Enviar" action="#{mensagemBean.cadastrar()}"
+                                     update="@form"></p:commandButton>
+
+                    <!--<p:commandButton value="Listar" action="#{mensagemBean.listar()}" update="@form"></p:commandButton>-->
+                </p:panelGrid> 
+                    </center>
+                <br/><br/>
+                
+                 <f:viewAction action="#{mensagemBean.listar()}"/>
+                
+                <p:dataTable value="#{mensagemBean.listamsg}" var="lista">
+                    <p:column headerText="Código">
+                        <h:outputText value="#{lista.codigo}"></h:outputText>   
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{lista.nome}"></h:outputText>   
+                    </p:column>
+                    <p:column headerText="E-mail">
+                        <h:outputText value="#{lista.email}"></h:outputText>   
+                    </p:column>
+                    <p:column headerText="Usuario">
+                        <h:outputText value="#{lista.usuario}"></h:outputText>   
+                    </p:column>
+                    <p:column headerText="Senha">
+                        <h:outputText value="#{lista.senha}"></h:outputText>   
+                    </p:column>
+                    <center>
+                    <p:column headerText="Alterar">
+                        <p:commandButton value="Alterar" action="#{mensagemBean.alterar(lista)}" update="@form"></p:commandButton>
+                    </p:column>
+                    <p:column headerText="Excluir">
+                        <p:commandButton value="Excluir" action="#{mensagemBean.deletar(lista)}" update="@form"></p:commandButton>
+                    </p:column>    
+                        </center>
+                </p:dataTable>
+
+            </h:form>    
+        </p:fieldset>
+
+    </h:body>
+</html>
